@@ -1,0 +1,10 @@
+{
+    "servers": {
+        "web": {
+            "command": "python",
+            "args": [
+                "web_scraper.py"
+            ]
+        }
+    }
+}

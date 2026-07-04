@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Qwen Agent — Local Tool-Using Chat</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-badge">Q</span>
+        <span class="logo-word">Qwen</span>
+        <span class="eyebrow">BUILD WITH QWEN</span>
+      </div>
+      <div class="status">
+        <span class="dot" id="statusDot"></span>
+        <span id="statusText">{{ model }} · local &amp; offline</span>
+      </div>
+    </header>
+
+    <main class="chat" id="chat">
+      <div class="empty-state" id="emptyState">
+        <p class="empty-title">Ask it something a plain chatbot would have to guess at.</p>
+        <p class="empty-sub">It'll decide on its own whether to reach for a tool.</p>
+        <div class="suggestions">
+          <button class="suggestion" data-q="What's our Q3 engineering budget split?">What's our Q3 engineering budget split?</button>
+          <button class="suggestion" data-q="Is the payments migration still at risk? Check notes and meeting notes.">Is the payments migration still at risk?</button>
+          <button class="suggestion" data-q="What's 18 out of 50 as a percentage, and what does that tell you about the beta pilot?">18 of 50 as a percentage — and what it means for the beta pilot?</button>
+        </div>
+      </div>
+    </main>
+
+    <form class="composer" id="composer">
+      <label class="think-toggle" title="Show the model's reasoning trace before its answer">
+        <input type="checkbox" id="thinkToggle" />
+        <span>Show thinking</span>
+      </label>
+      <input
+        type="text"
+        id="questionInput"
+        placeholder="Ask the agent something..."
+        autocomplete="off"
+      />
+      <button type="submit" id="sendBtn">Send</button>
+    </form>
+
+  </div>
+
+  <template id="tpl-user">
+    <div class="msg msg-user"><div class="bubble"></div></div>
+  </template>
+
+  <template id="tpl-assistant">
+    <div class="msg msg-assistant">
+      <div class="avatar">Q</div>
+      <div class="assistant-col">
+        <details class="thinking" hidden>
+          <summary>Thinking…</summary>
+          <div class="thinking-text"></div>
+        </details>
+        <div class="tool-events"></div>
+        <div class="bubble content-text"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-tool-event">
+    <details class="tool-event">
+      <summary>
+        <span class="tool-icon">&#9881;</span>
+        <span class="tool-name"></span>
+        <span class="tool-status">running…</span>
+      </summary>
+      <div class="tool-body">
+        <div class="tool-args"></div>
+        <div class="tool-result"></div>
+      </div>
+    </details>
+  </template>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

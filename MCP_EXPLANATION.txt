@@ -1,0 +1,33 @@
+QWEN AGENT: MCP vs NO-MCP
+========================
+
+TWO VERSIONS AVAILABLE:
+
+1. qwen_agent_web.py (NO MCP)
+   - Simple, standalone version
+   - Uses only built-in Python tools (read files, search, etc.)
+   - No external server connections needed
+   - Best for: Quick setup, offline use, minimal dependencies
+   - Run: python qwen_agent_web.py --port 5050
+
+2. qwen_agent_mcp.py (WITH MCP SUPPORT)
+   - Enhanced version with Model Context Protocol integration
+   - Connects to external MCP servers for additional tools
+   - Can use local tools + remote tools together
+   - Reads server list from mcp_config.json
+   - Best for: Advanced use cases, connecting to external services
+   - Run: python qwen_agent_mcp.py --port 5050
+   - Or without MCP: python qwen_agent_mcp.py --port 5050 --no-mcp
+
+WHAT IS MCP?
+============
+MCP (Model Context Protocol) is a standard protocol that lets AI agents connect to
+external servers to call remote tools. For example, you could set up MCP servers that
+provide specialized capabilities like web browsing, database queries, or custom APIs.
+
+CHOOSING WHICH ONE TO USE:
+==========================
+- Start with qwen_agent_web.py (simpler, no setup needed)
+- Switch to qwen_agent_mcp.py if you want to add external tools/services
+- Both run the same agent loop and chat interface
+- Both support streaming responses and tool use
